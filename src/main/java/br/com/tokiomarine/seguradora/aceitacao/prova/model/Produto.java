@@ -1,15 +1,16 @@
 package br.com.tokiomarine.seguradora.aceitacao.prova.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import br.com.tokiomarine.seguradora.aceitacao.prova.service.PedidoService;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Produto {
@@ -22,9 +23,9 @@ public class Produto {
 	
 	private Double preco;
 	
-	private Date dtIncls;
+	private LocalDateTime dtInclsAlt;
 	
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(mappedBy="produto",fetch=FetchType.LAZY)
 	private List<Pedido> pedidos;
 
 	public Long getId() {
@@ -51,12 +52,12 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Date getDtIncls() {
-		return dtIncls;
+	public LocalDateTime getDtInclsAlt() {
+		return dtInclsAlt;
 	}
 
-	public void setDtIncls(Date dtIncls) {
-		this.dtIncls = dtIncls;
+	public void setDtInclsAlt(LocalDateTime dtInclsAlt) {
+		this.dtInclsAlt = dtInclsAlt;
 	}
 
 	public List<Pedido> getPedidos() {
@@ -67,6 +68,12 @@ public class Produto {
 		this.pedidos = pedidos;
 	}
 
+	@PrePersist
+	@PreUpdate
+	public void addDtInclsAlt() {
+		dtInclsAlt = LocalDateTime.now();
+	}
+	
 	
 
 }

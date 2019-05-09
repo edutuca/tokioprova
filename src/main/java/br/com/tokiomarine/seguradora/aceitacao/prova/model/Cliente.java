@@ -1,14 +1,16 @@
 package br.com.tokiomarine.seguradora.aceitacao.prova.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 @Entity
 public class Cliente {
@@ -19,7 +21,7 @@ public class Cliente {
 	
 	private String nome;
 	
-	private Long idade;
+	private Integer idade;
 	
 	private String cpf;
 	
@@ -27,9 +29,9 @@ public class Cliente {
 	
 	private String cep;
 	
-	private Date dtIncls;
+	private LocalDateTime dtInclsAlt;
 
-	@OneToMany(mappedBy="cliente", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)
 	private List<Pedido> pedidos;
 
 	public Long getId() {
@@ -48,11 +50,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public Long getIdade() {
+	public Integer getIdade() {
 		return idade;
 	}
 
-	public void setIdade(Long idade) {
+	public void setIdade(Integer idade) {
 		this.idade = idade;
 	}
 
@@ -80,14 +82,6 @@ public class Cliente {
 		this.cep = cep;
 	}
 
-	public Date getDtIncls() {
-		return dtIncls;
-	}
-
-	public void setDtIncls(Date dtIncls) {
-		this.dtIncls = dtIncls;
-	}
-
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
@@ -96,6 +90,19 @@ public class Cliente {
 		this.pedidos = pedidos;
 	}
 
+	
+	public LocalDateTime getDtInclsAlt() {
+		return dtInclsAlt;
+	}
 
+	public void setDtInclsAlt(LocalDateTime dtInclsAlt) {
+		this.dtInclsAlt = dtInclsAlt;
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void addDtInclsAlt() {
+		dtInclsAlt = LocalDateTime.now();
+	}
 	
 }

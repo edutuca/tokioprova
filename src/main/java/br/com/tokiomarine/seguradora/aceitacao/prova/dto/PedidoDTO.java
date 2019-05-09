@@ -1,57 +1,25 @@
 package br.com.tokiomarine.seguradora.aceitacao.prova.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class PedidoDTO {
 	
-	private Long pedidoId;
-	
-	private Long clienteId;
-	
-	private Long produtoId;
-	
-	private String clienteNome;
-	
-	private String produtoNome;
-	
+	private Long id;
+		
+	@NotNull
 	private Integer qtdPedido;
+	
+	private ProdutoDTO produto;
+		
+	private ClienteDTO cliente;
 
-	public Long getPedidoId() {
-		return pedidoId;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setPedidoId(Long pedidoId) {
-		this.pedidoId = pedidoId;
-	}
-
-	public Long getClienteId() {
-		return clienteId;
-	}
-
-	public void setClienteId(Long clienteId) {
-		this.clienteId = clienteId;
-	}
-
-	public Long getProdutoId() {
-		return produtoId;
-	}
-
-	public void setProdutoId(Long produtoId) {
-		this.produtoId = produtoId;
-	}
-
-	public String getClienteNome() {
-		return clienteNome;
-	}
-
-	public void setClienteNome(String clienteNome) {
-		this.clienteNome = clienteNome;
-	}
-
-	public String getProdutoNome() {
-		return produtoNome;
-	}
-
-	public void setProdutoNome(String produtoNome) {
-		this.produtoNome = produtoNome;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getQtdPedido() {
@@ -62,5 +30,22 @@ public class PedidoDTO {
 		this.qtdPedido = qtdPedido;
 	}
 
+	public ProdutoDTO getProduto() {
+		return produto;
+	}
 
+	public void setProduto(ProdutoDTO produto) {
+		this.produto = produto;
+	}
+
+	public ClienteDTO getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+	}
+
+
+	
 }

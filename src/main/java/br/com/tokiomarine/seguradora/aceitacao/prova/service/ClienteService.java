@@ -8,15 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Cliente;
 import br.com.tokiomarine.seguradora.aceitacao.prova.repository.ClienteRepository;
+import br.com.tokiomarine.seguradora.aceitacao.prova.util.ProvaUtil;
 
 @Service
 public class ClienteService {
+	
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
 	public List<Cliente> lista(){
-		return clienteRepository.findAll();
+		return ProvaUtil.analisaList(clienteRepository.findAll());
 	}
 	
 	public Cliente load(Long id) {
@@ -24,7 +26,8 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public void update(Cliente cliente) {
+	public void update(Long id, Cliente cliente) {
+		cliente.setId(id);
 		clienteRepository.saveAndFlush(cliente);
 	}
 	

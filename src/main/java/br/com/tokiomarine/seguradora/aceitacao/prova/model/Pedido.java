@@ -1,12 +1,13 @@
 package br.com.tokiomarine.seguradora.aceitacao.prova.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Pedido {
@@ -17,14 +18,15 @@ public class Pedido {
 	
 	private Integer qtdPedido;
 	
-	private Date dtPedido;
+	private LocalDateTime dtPedido;
 	
-	@ManyToOne(targetEntity=Cliente.class)
+	@ManyToOne(targetEntity=Cliente.class, optional=false)
 	private Cliente cliente;
 	
-	@ManyToOne(targetEntity=Produto.class)
+	@ManyToOne(targetEntity=Produto.class, optional=false)
 	private Produto produto;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -41,11 +43,11 @@ public class Pedido {
 		this.qtdPedido = qtdPedido;
 	}
 
-	public Date getDtPedido() {
+	public LocalDateTime getDtPedido() {
 		return dtPedido;
 	}
 
-	public void setDtPedido(Date dtPedido) {
+	public void setDtPedido(LocalDateTime dtPedido) {
 		this.dtPedido = dtPedido;
 	}
 
@@ -65,5 +67,8 @@ public class Pedido {
 		this.produto = produto;
 	}
 
-
+	@PrePersist
+	public void addDtPedido() {
+		dtPedido = LocalDateTime.now();
+	}
 }

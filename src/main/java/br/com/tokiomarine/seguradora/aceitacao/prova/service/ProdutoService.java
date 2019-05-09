@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Produto;
 import br.com.tokiomarine.seguradora.aceitacao.prova.repository.ProdutoRepository;
+import br.com.tokiomarine.seguradora.aceitacao.prova.util.ProvaUtil;
 
 @Service
 public class ProdutoService {
@@ -16,7 +17,7 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	public List<Produto> lista(){
-		return produtoRepository.findAll();
+		return ProvaUtil.analisaList(produtoRepository.findAll());
 	}
 	
 	public Produto load(Long id) {
@@ -24,7 +25,8 @@ public class ProdutoService {
 	}
 	
 	@Transactional
-	public void update(Produto produto) {
+	public void update(Long id, Produto produto) {
+		produto.setId(id);
 		produtoRepository.saveAndFlush(produto);
 	}
 	

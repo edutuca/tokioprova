@@ -2,12 +2,16 @@ package br.com.tokiomarine.seguradora.aceitacao.prova.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class ProdutoDTO {
 	
 	private Long id;
 	
+	@NotNull
 	private String produto;
 	
+	@NotNull
 	private Double preco;
 	
 	private Date dtIncls;

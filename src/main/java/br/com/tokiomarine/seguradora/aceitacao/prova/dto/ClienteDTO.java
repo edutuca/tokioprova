@@ -1,17 +1,23 @@
 package br.com.tokiomarine.seguradora.aceitacao.prova.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class ClienteDTO {
 	
 	private Long id;
 	
+	@NotNull
 	private String nome;
 	
 	private Long idade;
 	
+	@NotNull
 	private String cpf;
 	
+	@NotNull
 	private String endereco;
 	
+	@NotNull
 	private String cep;
 
 	public Long getId() {
