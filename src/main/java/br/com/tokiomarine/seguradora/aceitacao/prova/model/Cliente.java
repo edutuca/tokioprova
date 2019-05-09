@@ -32,7 +32,7 @@ public class Cliente {
 	private LocalDateTime dtInclsAlt;
 
 	@OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)
-	private List<Pedido> pedidos;
+	private List<ClienteProduto> clienteProduto;
 
 	public Long getId() {
 		return id;
@@ -82,15 +82,15 @@ public class Cliente {
 		this.cep = cep;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
-
 	
+	public List<ClienteProduto> getClienteProduto() {
+		return clienteProduto;
+	}
+
+	public void setClienteProduto(List<ClienteProduto> clienteProduto) {
+		this.clienteProduto = clienteProduto;
+	}
+
 	public LocalDateTime getDtInclsAlt() {
 		return dtInclsAlt;
 	}

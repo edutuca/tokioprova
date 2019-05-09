@@ -2,7 +2,7 @@ package br.com.tokiomarine.seguradora.aceitacao.prova.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class PedidoDTO {
+public class ClienteProdutoDTO {
 	
 	private Long id;
 		

@@ -26,7 +26,7 @@ public class Produto {
 	private LocalDateTime dtInclsAlt;
 	
 	@OneToMany(mappedBy="produto",fetch=FetchType.LAZY)
-	private List<Pedido> pedidos;
+	private List<ClienteProduto> clienteProduto;
 
 	public Long getId() {
 		return id;
@@ -60,12 +60,13 @@ public class Produto {
 		this.dtInclsAlt = dtInclsAlt;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
+
+	public List<ClienteProduto> getClienteProduto() {
+		return clienteProduto;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public void setClienteProduto(List<ClienteProduto> clienteProduto) {
+		this.clienteProduto = clienteProduto;
 	}
 
 	@PrePersist

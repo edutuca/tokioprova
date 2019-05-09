@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Cliente;
-import br.com.tokiomarine.seguradora.aceitacao.prova.model.Pedido;
+import br.com.tokiomarine.seguradora.aceitacao.prova.model.ClienteProduto;
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Produto;
 import br.com.tokiomarine.seguradora.aceitacao.prova.repository.PedidoRepository;
 import br.com.tokiomarine.seguradora.aceitacao.prova.util.ProvaUtil;
 
 @Service
-public class PedidoService {
+public class ClienteProdutoService {
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -25,25 +25,25 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
-	public List<Pedido> listaPorCliente(Long id){
+	public List<ClienteProduto> listaPorCliente(Long id){
 		
 		return ProvaUtil.analisaStream(pedidoRepository.listaPorCliente(id));
 	}
 	
-	public List<Pedido> listaPorProduto(Long id) {
+	public List<ClienteProduto> listaPorProduto(Long id) {
 		return ProvaUtil.analisaStream(pedidoRepository.listaPorProduto(id));
 	}
 	
 	@Transactional
-	public void save(Pedido pedido) {
+	public void save(ClienteProduto clienteProduto) {
 		
-		Cliente cliente = clienteService.load(pedido.getCliente().getId());
-		Produto produto = produtoService.load(pedido.getProduto().getId());
+		Cliente cliente = clienteService.load(clienteProduto.getCliente().getId());
+		Produto produto = produtoService.load(clienteProduto.getProduto().getId());
 		
-		pedido.setCliente(cliente);
-		pedido.setProduto(produto);
+		clienteProduto.setCliente(cliente);
+		clienteProduto.setProduto(produto);
 		
-		pedidoRepository.save(pedido);
+		pedidoRepository.save(clienteProduto);
 	}
 	
 	@Transactional

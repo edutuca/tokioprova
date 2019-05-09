@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tokiomarine.seguradora.aceitacao.prova.configuration.ModelMapperCustom;
-import br.com.tokiomarine.seguradora.aceitacao.prova.dto.PedidoDTO;
-import br.com.tokiomarine.seguradora.aceitacao.prova.model.Pedido;
-import br.com.tokiomarine.seguradora.aceitacao.prova.service.PedidoService;
+import br.com.tokiomarine.seguradora.aceitacao.prova.dto.ClienteProdutoDTO;
+import br.com.tokiomarine.seguradora.aceitacao.prova.model.ClienteProduto;
+import br.com.tokiomarine.seguradora.aceitacao.prova.service.ClienteProdutoService;
 
 @RestController()
 @RequestMapping("/{versao}/")
@@ -29,25 +29,25 @@ public class PedidoController {
 	private ModelMapperCustom modelMapper;
 	
 	@Autowired
-	private PedidoService pedidoService;
+	private ClienteProdutoService clienteProdutoService;
 	
 	@GetMapping("cliente/{idClien}/pedido")
-	public List<PedidoDTO> listaPorCliente(@PathVariable("idClien") Long idClien){
-		return modelMapper.mapCollection(pedidoService.listaPorCliente(idClien).stream(), PedidoDTO.class);
+	public List<ClienteProdutoDTO> listaPorCliente(@PathVariable("idClien") Long idClien){
+		return modelMapper.mapCollection(clienteProdutoService.listaPorCliente(idClien).stream(), ClienteProdutoDTO.class);
 	}
 	
 	@GetMapping("produto/{idProd}/pedido")
-	public List<PedidoDTO> listaPorProduto(@PathVariable("idProd") Long idProd){
-		return modelMapper.mapCollection(pedidoService.listaPorProduto(idProd).stream(), PedidoDTO.class);
+	public List<ClienteProdutoDTO> listaPorProduto(@PathVariable("idProd") Long idProd){
+		return modelMapper.mapCollection(clienteProdutoService.listaPorProduto(idProd).stream(), ClienteProdutoDTO.class);
 	}
 	
 	@PostMapping("pedido")
-	public void save(@Valid @RequestBody PedidoDTO pedidoDTO){
-		pedidoService.save(modelMapper.map(pedidoDTO, Pedido.class));
+	public void save(@Valid @RequestBody ClienteProdutoDTO pedidoDTO){
+		clienteProdutoService.save(modelMapper.map(pedidoDTO, ClienteProduto.class));
 	}
 	
 	@DeleteMapping("pedido/{id}")
 	public void delete(@PathVariable Long id){
-		pedidoService.remove(id);
+		clienteProdutoService.remove(id);
 	}
 }

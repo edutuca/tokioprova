@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 @Entity
-public class Pedido {
+public class ClienteProduto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
