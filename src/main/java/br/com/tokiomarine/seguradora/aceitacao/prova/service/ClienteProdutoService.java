@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Cliente;
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.ClienteProduto;
 import br.com.tokiomarine.seguradora.aceitacao.prova.model.Produto;
-import br.com.tokiomarine.seguradora.aceitacao.prova.repository.PedidoRepository;
+import br.com.tokiomarine.seguradora.aceitacao.prova.repository.ClienteProdutoRepository;
 import br.com.tokiomarine.seguradora.aceitacao.prova.util.ProvaUtil;
 
 @Service
@@ -23,15 +23,15 @@ public class ClienteProdutoService {
 	private ProdutoService produtoService;
 	
 	@Autowired
-	private PedidoRepository pedidoRepository;
+	private ClienteProdutoRepository clienteProdutoRepository;
 	
 	public List<ClienteProduto> listaPorCliente(Long id){
 		
-		return ProvaUtil.analisaStream(pedidoRepository.listaPorCliente(id));
+		return ProvaUtil.analisaStream(clienteProdutoRepository.listaPorCliente(id));
 	}
 	
 	public List<ClienteProduto> listaPorProduto(Long id) {
-		return ProvaUtil.analisaStream(pedidoRepository.listaPorProduto(id));
+		return ProvaUtil.analisaStream(clienteProdutoRepository.listaPorProduto(id));
 	}
 	
 	@Transactional
@@ -43,11 +43,11 @@ public class ClienteProdutoService {
 		clienteProduto.setCliente(cliente);
 		clienteProduto.setProduto(produto);
 		
-		pedidoRepository.save(clienteProduto);
+		clienteProdutoRepository.save(clienteProduto);
 	}
 	
 	@Transactional
 	public void remove(Long id) {
-		pedidoRepository.deleteById(id);
+		clienteProdutoRepository.deleteById(id);
 	}
 }
