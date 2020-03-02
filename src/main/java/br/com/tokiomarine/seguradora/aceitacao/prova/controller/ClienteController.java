@@ -29,6 +29,7 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	//Test
 	@GetMapping("clientes")
 	public List<ClienteDTO> lista(){
 		return modelMapper.mapCollection(clienteService.lista().stream(), ClienteDTO.class);
